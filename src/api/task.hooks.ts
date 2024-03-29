@@ -69,6 +69,8 @@ export const useUpdateTask = (statusType:string) => {
                 type?: string;
                 status?: string;
                 createdAt?: string;
+                updatedAt?: string;
+                dueDate?: string;
             }
         }) => {
             const { userId, taskId, body } = data
@@ -79,6 +81,7 @@ export const useUpdateTask = (statusType:string) => {
                 type: body.type,
                 status: body.status,
                 createdAt: body.createdAt,
+                dueDate: body.dueDate,
                 updatedAt: new Date().toISOString()
             }
             const taskRef = ref(db, `tasks/${userId}/${taskId}`)

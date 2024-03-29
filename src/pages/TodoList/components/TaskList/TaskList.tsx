@@ -55,15 +55,38 @@ export default function TaskList({ taskList, loading, setTab }: Props) {
             }
         },
         {
+            title: 'Due Date',
+            dataIndex: 'dueDate',
+            key: 'dueDate',
+            render: (date: string) => {
+                const formattedDate = dayjs(date).format('DD MMM, YYYY');
+                return <p className='text-sm text-gray-500 w-[100px]'>{formattedDate}</p>
+            }
+        },
+        {
             title: 'Task type',
             dataIndex: 'type',
             key: 'type',
-            render: (type: string) => {
-                const taskType = type === 'bug' ? 'error' : type === 'task' ? 'processing' : 'warning';
-                const taskTypeName = type[0].toUpperCase() + type.slice(1)
+            render: (type: string,data:any) => {
+                // const taskType = type === 'bug' ? 'error' : type === 'task' ? 'processing' : 'warning';
+                // const taskTypeName = type[0].toUpperCase() + type.slice(1)
                 const taskTypeClass = type === 'bug' ? 'bg-red-100 text-red-600' : type === 'task' ? 'bg-blue-100 text-blue-600' : 'bg-yellow-100 text-yellow-600';
-                return <div className={isMobile ? `w-[100px]` : `w-[120px]`}>
-                    <Badge className={`${taskTypeClass} px-3 rounded-md`} status={taskType} text={taskTypeName} />
+                return <div className={isMobile ? `w-[120px]` : ``}>
+                    <Select
+                        onClick={(e) => e.stopPropagation()}
+                        className={`${taskTypeClass} px-3 rounded-md`}
+                        value={type}
+                        style={{ width: 140 }}
+                        bordered={false}
+                        dropdownMatchSelectWidth={false}
+                        onChange={(value) => {
+                            handleChangeType(value, data)
+                        }}
+                    >
+                        <Select.Option value="task">Task</Select.Option>
+                        <Select.Option value="bug">Bug</Select.Option>
+                        <Select.Option value="error">Error</Select.Option>
+                    </Select>
                 </div>
             }
         },
@@ -107,7 +130,20 @@ export default function TaskList({ taskList, loading, setTab }: Props) {
             }
         }
     ]
-
+    const handleChangeType = (value: string, data: any) => {
+        updateTask.mutateAsync({
+            userId: data.userId,
+            taskId: data._id,
+            body: {
+                ...data,
+                type: value
+            }
+        }).then(() => {
+            message.success('Task updated successfully')
+        }).catch((err) => {
+            message.error(err.message)
+        })
+    }
     const handleChangeStatus = (value: string, data: any) => {
         updateTask.mutateAsync({
             userId: data.userId,

@@ -51,7 +51,7 @@
 }
 
 .ant-menu-item svg {
-    color: var(--primary-color) !important;
+    color: var(--color-white) !important;
 }
 :where(.css-dev-only-do-not-override-19uz8l2).ant-table-wrapper .ant-table.ant-table-small .ant-table-title,
 :where(.css-dev-only-do-not-override-19uz8l2).ant-table-wrapper .ant-table.ant-table-small .ant-table-footer,
@@ -65,4 +65,18 @@
 }
 .ant-table-wrapper .ant-table-tbody>tr>td{
     cursor: pointer;
+}
+:where(.css-dev-only-do-not-override-19uz8l2).ant-menu-light .ant-menu-item-selected,
+:where(.css-dev-only-do-not-override-19uz8l2).ant-menu-light>.ant-menu .ant-menu-item-selected{
+    background-color: var(--violet-600);
+    color: var(--color-white);
+}
+:where(.css-dev-only-do-not-override-19uz8l2).ant-menu-light,
+:where(.css-dev-only-do-not-override-19uz8l2).ant-menu-light>.ant-menu{
+    background-color: transparent;
+}
+
+.ant-table{
+        height: 880px;
+            overflow: auto;
 }

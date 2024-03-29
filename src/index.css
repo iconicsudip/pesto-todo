@@ -329,6 +329,6 @@
   --body-text-color: var(--gray-700);
   --title-text-color: var(--gray-800);
   --secondary-text-color: var(--gray-600);
-  --sidebar-width: 250px;
+  --sidebar-width: 180px;
   --header-height: 64px;
 }

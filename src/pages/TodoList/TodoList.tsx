@@ -59,7 +59,7 @@ export default function TodoList() {
                 <Button type='primary' onClick={handleOpenAddModal}>Add Track</Button>
             </div>
             <div className='flex flex-wrap justify-end'>
-                <div className="col-4">
+                <div className="col-12">
                     <div className="flex flex-col">
                         <h4 className='text-gray-600 mb-1'>Search Task</h4>
                         <SearchBar

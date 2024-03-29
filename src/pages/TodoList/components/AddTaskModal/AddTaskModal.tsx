@@ -1,8 +1,9 @@
-import { Form, Input, Modal, Select, message } from 'antd'
+import { DatePicker, Form, Input, Modal, Select, message } from 'antd'
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { RootState } from '../../../../store'
 import { useCreateTask } from '../../../../api/task.hooks'
+import { Dayjs } from 'dayjs'
 
 interface Props {
     open: boolean
@@ -31,7 +32,8 @@ export default function AddTaskModal({ open, setOpen, currentTab }: Props) {
         taskForm.submit()
     }
 
-    const createTask = (values: {title:string,desc:string,type:string}) => {
+    const createTask = (values: {title:string,desc:string,type:string,dueDate: string | Dayjs}) => {
+        values.dueDate = typeof values.dueDate!=="string" ? values.dueDate.toISOString() : values.dueDate
         taskCreate.mutateAsync({
             userId: userDetails._id,
             body: values
@@ -87,6 +89,15 @@ export default function AddTaskModal({ open, setOpen, currentTab }: Props) {
                             </Select.Option>
                         ))}
                     </Select>
+                </Form.Item>
+                <Form.Item
+                    label="Due Date"
+                    name="dueDate"
+                    rules={[{ required: true, message: 'Please select your task due date!' }]}
+                >
+                    <DatePicker showTime className='w-full' format={
+                        'DD MMM, YYYY hh:mm A'
+                    }/>
                 </Form.Item>
             </Form>
         </Modal>

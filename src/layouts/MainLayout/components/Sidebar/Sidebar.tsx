@@ -40,7 +40,7 @@ export default function Sidebar() {
         <Layout.Sider
             collapsed={sidebarCollapsed}
             breakpoint='lg'
-            className={`bg-[white!important] fixed h-full z-50 left-0 top-0 w-[var(--sidebar-width)] transition-all duration-300 ease-in-out ${styles.sidebar}`}
+            className={`bg-[var(--gray-900)!important] fixed h-full z-50 left-0 top-0 w-[var(--sidebar-width)] transition-all duration-300 ease-in-out ${styles.sidebar}`}
             width={`var(--sidebar-width)`}
             collapsedWidth="0"
             onCollapse={(collapsed) => {
@@ -52,7 +52,7 @@ export default function Sidebar() {
         >
             <div className='p-6 pt-5 flex gap-3 items-center'>
                 <img src="/vite.svg" alt="" />
-                <h3>Track list</h3>
+                <h3 className='text-white'>Track list</h3>
             </div>
             <Menu
                 // theme='dark'

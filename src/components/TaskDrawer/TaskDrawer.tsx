@@ -1,4 +1,4 @@
-import { Badge, Button, Drawer, Input, message } from 'antd'
+import { Badge, Button, DatePicker, Drawer, Input, message } from 'antd'
 import React, { useState } from 'react'
 import { T_Task } from '../../types/task'
 import dayjs from 'dayjs'
@@ -20,6 +20,7 @@ export default function TaskDrawer({ open, setOpen, taskDetails,statustype }: Pr
     const [currentTask, setCurrentTask] = useState<T_Task>(taskDetails);
     const [taskTitle, setTaskTitle] = useState(false);
     const [taskDesc, setTaskDesc] = useState(false);
+    const [dueDate, setDueDate] = useState(false);
     const type = currentTask.type;
     const status = currentTask.status;
     const taskType = type === 'bug' ? 'error' : type === 'task' ? 'processing' : 'warning';
@@ -29,6 +30,7 @@ export default function TaskDrawer({ open, setOpen, taskDetails,statustype }: Pr
     const statusType = status === 'todo' ? 'warning' : status === 'inProgress' ? 'processing' : 'success';
     const taskStatusClass = status === 'todo' ? 'bg-yellow-100 text-yellow-600' : status === 'inProgress' ? 'bg-violet-100 text-violet-600' : 'bg-green-100 text-green-600';
     const handleSaveChanges = () => {
+        console.log(currentTask)
         updateTask.mutateAsync({
             userId: userDetails._id,
             taskId: taskDetails._id,
@@ -47,6 +49,9 @@ export default function TaskDrawer({ open, setOpen, taskDetails,statustype }: Pr
     }
     const toggleDescInput = () => {
         setTaskDesc(!taskDesc)
+    }
+    const toggleDueDate = () => {
+        setDueDate(!dueDate)
     }
     return (
         <Drawer
@@ -102,6 +107,17 @@ export default function TaskDrawer({ open, setOpen, taskDetails,statustype }: Pr
                 <div className="sm:w-1/2 w-full">
                     <h4 className='text-gray-600'>Updated at</h4>
                     <p className='text-gray-500'>{dayjs(currentTask.updatedAt).format("DD MMM, YYYY - hh:mm A")}</p>
+                </div>
+                <div className="sm:w-1/2 w-full">
+                    <h4 className='text-gray-600'>Due date</h4>
+                    {dueDate ? <DatePicker showTime  format={"DD MMM, YYYY - hh:mm A"} value={dayjs(currentTask.dueDate)} onChange={(date)=>{
+                        setCurrentTask({
+                            ...currentTask,
+                            dueDate: date.toISOString()
+                        })
+                        toggleDueDate()
+                    }}   />
+                    :<p className='text-gray-500' onClick={toggleDueDate}>{dayjs(currentTask.dueDate).format("DD MMM, YYYY - hh:mm A")}</p>}
                 </div>
                 <div className="sm:w-1/2 w-full">
                     <h4 className='text-gray-600'>Task type</h4>
