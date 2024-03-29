@@ -1,30 +1,42 @@
-# React + TypeScript + Vite
+# Todo List Application Readme
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This repository contains a Todo List application built with React using Vite, Firebase, Ant Design (antd), and Tailwind CSS. The application allows users to manage their tasks with various features including authentication, task creation, updating task details, and more.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+1. **Firebase Database Integration**: Utilizes Firebase as the backend database.
+2. **Firebase Authentication**: Implements Firebase authentication system for user management.
+3. **Task Management**:
+   - Users can create tasks with title, description, task type, and due date.
+   - Update task type and status directly from the task table.
+   - Modify title, description, and due date from the task details drawer.
+4. **Component Libraries**:
+   - Utilizes Ant Design (antd) for UI components.
+   - Tailwind CSS for responsive design, ensuring optimal viewing experience on various devices.
+5. **Vite React Setup**:
+   - Developed using Vite, a next-generation frontend tooling for React projects.
+   - Frontend runs on port `localhost:5173`.
+6. **Environment Configuration**:
+   - Configured `.env` file with `VITE_APP_API_URL` set to `https://track-list-4de35-default-rtdb.firebaseio.com`.
 
-## Expanding the ESLint configuration
+## Getting Started
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+To run the application locally, follow these steps:
 
-- Configure the top-level `parserOptions` property like this:
+1. Clone this repository.
+2. Install dependencies using `npm install`.
+3. Configure Firebase credentials in your Firebase project.
+4. Set up Firebase Authentication and Database rules as required.
+5. Create a `.env` file and set `VITE_APP_API_URL` to your Firebase Database URL.
+6. Run the application using `npm run dev`.
+7. Access the application at `localhost:5173` in your browser.
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+## Deployment
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+To deploy the application, consider the following steps:
+
+1. Build the application using `npm run build`.
+2. Deploy the built files to your hosting platform.
+3. Configure environment variables as needed for the production environment.
+4. Ensure Firebase configurations are set up correctly for production.
+5. Deploy Firebase functions if required for server-side operations.
