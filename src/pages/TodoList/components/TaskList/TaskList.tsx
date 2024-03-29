@@ -32,6 +32,12 @@ export default function TaskList({ taskList, loading, setTab }: Props) {
             title: 'Title',
             dataIndex: 'title',
             key: 'title',
+            render: (text: string) => {
+                return <div className='flex items-center gap-2 w-[150px]'>
+                    <p className='text-sm font-semibold'>{text.length > 20 ?
+                        text.slice(0, 19) + '...' : text}</p>
+                </div>
+            }
         },
         {
             title: 'Description',
@@ -40,7 +46,7 @@ export default function TaskList({ taskList, loading, setTab }: Props) {
             width: 300,
             render: (text: string) => {
                 const isLong = text.length > 30;
-                return <p className='text-sm text-gray-500'>
+                return <p className='text-sm text-gray-500 w-[150px]'>
                     {isLong ? text.slice(0, 30) + '...' : text}
                 </p>
             }
